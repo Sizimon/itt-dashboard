@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import Navigation from '../components/Navigation';
+
 const Register: React.FC = () => {
     const [username, setUsername] = useState<string>('');
     const [email, setEmail] = useState<string>('');
@@ -48,7 +50,7 @@ const Register: React.FC = () => {
 
     return (
         <div>
-            <h1>Register</h1>
+            <Navigation />
         </div>
     )
 }
