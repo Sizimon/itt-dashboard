@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Layout from '../Layout';
-import { useAuth } from '../AuthProvider';
+import { useAuth } from '../context/AuthProvider';
 
 
 const Login: React.FC = () => {
