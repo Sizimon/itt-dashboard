@@ -1,30 +1,33 @@
-import React, {use, useEffect, useState} from 'react';
+import React, { useEffect, useState} from 'react';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
+import { useAuth } from './AuthProvider';
+
 import Register from './pages/Register';
 import UserDashboard from './pages/UserDashboard';
 import Login from './pages/Login';
 
 const App: React.FC = () => {
-  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
+  const { isAuthenticated, setIsAuthenticated } = useAuth();
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  console.log(isAuthenticated);
+
+  useEffect(() => {
+      if (isAuthenticated) {
+        localStorage.setItem('isAuthenticated', 'true');
+      } else {
+        localStorage.setItem('isAuthenticated', 'false');
+      }
+  }, [isAuthenticated]);
 
   return (
     <Router>
       <Routes> 
         <Route 
           path="/register" 
-          element={<Register 
-            isAuthenticated={isAuthenticated} 
-            setIsAuthenticated={setIsAuthenticated} 
-          />}
+          element={<Register />}
         />
         <Route 
           path="/login" 
-          element={<Login
-            isAuthenticated={isAuthenticated}
-            setIsAuthenticated={setIsAuthenticated} 
-          />}
+          element={<Login />}
         />
         <Route 
           path="/user-dashboard" 

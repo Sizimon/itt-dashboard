@@ -1,13 +1,10 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Layout from '../Layout';
+import { useAuth } from '../AuthProvider';
 
-interface RegisterProps {
-    isAuthenticated: boolean;
-    setIsAuthenticated: (isAuthenticated: boolean) => void;
-}
-
-const Register: React.FC<RegisterProps> = ({ isAuthenticated, setIsAuthenticated }) => {
+const Register: React.FC = () => {
+    const { setIsAuthenticated } = useAuth();
     const [username, setUsername] = useState<string>('');
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
