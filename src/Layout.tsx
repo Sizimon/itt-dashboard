@@ -11,12 +11,12 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     const toggleSidebar = () => {
         setIsFolded(!isFolded);
     }
-    
+
     return (
         <div className="flex h-screen">
             <Navigation isFolded={isFolded} onToggleSidebar={toggleSidebar} />
             <main 
-                className={`flex-1 transition-all duration-300 ${isFolded ? 'ml-16' : 'ml-64'}`}
+                className={`flex-1 transition-all duration-300 ${isFolded ? 'md:ml-8' : 'md:ml-64'}`}
                 >
                 {children}
             </main>

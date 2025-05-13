@@ -1,8 +1,13 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Layout from '../Layout';
 
-const Register: React.FC = () => {
+interface RegisterProps {
+    isAuthenticated: boolean;
+    setIsAuthenticated: (isAuthenticated: boolean) => void;
+}
+
+const Register: React.FC<RegisterProps> = ({ isAuthenticated, setIsAuthenticated }) => {
     const [username, setUsername] = useState<string>('');
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
@@ -11,36 +16,29 @@ const Register: React.FC = () => {
     const [success, setSuccess] = useState<string>('');
     const navigate = useNavigate();
 
-    const lottieRef = useRef<any>(null);
-
-    useEffect(() => {
-        if (lottieRef.current) {
-            lottieRef.current.setSpeed(0.5);
-        }
-    }, []);
 
     const handleRegister = async (e: React.FormEvent) => {
         e.preventDefault();
         if (password !== confirmPassword) {
-            setError('Passwords do not match');
-            return;
-        }
-
-        if (!email.includes('@')) {
-            setError('Invalid email address');
-            return;
-        }
-
-        if (username.length < 3) {
-            setError('Username must be at least 3 characters long');
+            setError('Passwords do not match.');
             return;
         }
 
         const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,18}$/;
         if (!passwordRegex.test(password)) {
-            setError('Password must be 6-18 characters long and contain at least one letter, one number, and one special character');
+            setError('Password must be 6-18 characters long and contain at least one letter, one number, and one special character.');
             return;
         }
+
+        if (!email.includes('@')) {
+            setError('Invalid email address.');
+            return;
+        } // In the future check if email is already in use
+
+        if (username.length < 3) {
+            setError('Username must be at least 3 characters long.');
+            return;
+        } // In the future check if username is already taken
 
         // Simulate an API call
         try {
@@ -48,6 +46,7 @@ const Register: React.FC = () => {
             await new Promise((resolve) => setTimeout(resolve, 1000));
             setSuccess('Registration successful!');
             setError('');
+            setIsAuthenticated(true);
             // Redirect to login or dashboard
             navigate('/user-dashboard');
         } catch (err) {
@@ -64,9 +63,9 @@ const Register: React.FC = () => {
                 </div>
                 <div className='flex flex-col items-center justify-center'>
                     <h1 className="text-2xl font-bold mb-4">Register</h1>
-                    {error && <p className="text-red-500">{error}</p>}
+                    {error && <p className="text-red-500 text-center px-24 pb-4">{error}</p>}
                     {success && <p className="text-green-500">{success}</p>}
-                    <form onSubmit={handleRegister} className="flex flex-col space-y-4 bg-zinc-100 dark:bg-zinc-900 p-8 rounded-lg w-4/6">
+                    <form onSubmit={handleRegister} className="flex flex-col space-y-4 bg-zinc-100 dark:bg-zinc-950 p-8 rounded-lg w-4/6">
                         <div>
                             <label className="block text-sm font-medium">Username:</label>
                             <input
@@ -110,6 +109,9 @@ const Register: React.FC = () => {
                         >
                             Register
                         </button>
+                        <p className="text-center">
+                            Already have an account? <a href="/login" className="text-amber-600 hover:underline">Login here</a>
+                        </p>
                     </form>
                 </div>
             </div>

@@ -7,13 +7,18 @@ interface NavigationProps {
 }
 
 const Navigation: React.FC<NavigationProps> = ({ isFolded, onToggleSidebar }) => {
-    const [darkMode, setDarkMode] = useState<boolean>(false);
-    console.log('Dark mode:', darkMode);
+    const [darkMode, setDarkMode] = useState<boolean>(() => {
+        const savedMode = localStorage.getItem('darkMode');
+        return savedMode === 'true'
+    });
+
     useEffect(() => {
         if (darkMode) {
             document.documentElement.classList.add('dark');
+            localStorage.setItem('darkMode', 'true');
         } else {
             document.documentElement.classList.remove('dark');
+            localStorage.setItem('darkMode', 'false');
         }
     }, [darkMode]);
 
@@ -23,13 +28,13 @@ const Navigation: React.FC<NavigationProps> = ({ isFolded, onToggleSidebar }) =>
 
     return (
         <div 
-            className={`flex flex-col h-screen justify-between bg-zinc-100 text-zinc-900 dark:bg-zinc-900 dark:text-white fixed top-0 left-0 transition-all duration-300 
-                ${isFolded ? 'w-16' : 'w-64'
+            className={`flex flex-col h-screen justify-between bg-zinc-100 text-zinc-900 dark:bg-zinc-950 dark:text-white fixed top-0 left-0 transition-all duration-300 
+                ${isFolded ? 'hidden md:flex w-8' : 'hidden md:flex w-64'
             }`}
         >
             <div>
                 <button
-                    className="w-full py-2 bg-zinc-300 dark:bg-zinc-800 hover:bg-zinc-200 hover:dark:bg-zinc-600"
+                    className="w-full py-2 bg-zinc-300 dark:bg-zinc-900 transition-all duration-300 hover:bg-zinc-200 hover:dark:bg-zinc-800"
                     onClick={onToggleSidebar}
                 >
                     {isFolded ? '>' : '<'}
@@ -60,7 +65,7 @@ const Navigation: React.FC<NavigationProps> = ({ isFolded, onToggleSidebar }) =>
             {/* Dark Mode Toggle */}
             <div className={`text-center ${isFolded ? 'hidden' : 'block'}`}>
                 <button
-                    className='space-y-2 p-4 mb-8 bg-zinc-300 dark:bg-zinc-800 rounded cursor-pointer transition-all duration-300 hover:bg-zinc-200 hover:dark:bg-zinc-600'
+                    className='space-y-2 p-4 mb-8 bg-zinc-300 dark:bg-zinc-900 rounded cursor-pointer transition-all duration-300 hover:bg-zinc-200 hover:dark:bg-zinc-800'
                     onClick={toggleDarkMode}
                 >
                     Toggle {darkMode ? 'Light' : 'Dark'} Mode

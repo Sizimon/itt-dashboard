@@ -6,6 +6,15 @@
     <link href="../public/output.css" rel="stylesheet">
     <meta name="theme-color" content="#000000" />
     <title>InTime Tasks</title>
+    <script>
+      // Check localStorage for dark mode preference and apply the class immediately
+      const savedMode = localStorage.getItem('darkMode');
+      if (savedMode === 'true') {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    </script>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
