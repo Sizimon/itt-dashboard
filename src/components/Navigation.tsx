@@ -4,11 +4,16 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthProvider';
 
 interface NavigationProps {
-    isFolded: boolean;
+    sidebarOpen: boolean;
     onToggleSidebar: () => void;
+    sidebarRef: React.RefObject<HTMLDivElement | null>;
 }
 
-const Navigation: React.FC<NavigationProps> = ({ isFolded, onToggleSidebar }) => {
+const Navigation: React.FC<NavigationProps> = ({ 
+        sidebarOpen, 
+        onToggleSidebar,
+        sidebarRef,
+}) => {
     const { isAuthenticated, setIsAuthenticated } = useAuth();
     const navigate = useNavigate();
     const [darkMode, setDarkMode] = useState<boolean>(() => {
@@ -41,20 +46,18 @@ const Navigation: React.FC<NavigationProps> = ({ isFolded, onToggleSidebar }) =>
 
     return (
         <div
-            className={`flex flex-col h-screen justify-between bg-zinc-100 text-zinc-900 dark:bg-zinc-950 dark:text-white fixed top-0 left-0 transition-all duration-300 
-                ${isFolded ? 'hidden md:flex w-8' : 'hidden md:flex w-64'
-                }`}
+            ref={sidebarRef}
+            className={`
+                fixed top-0 left-0 h-full z-30
+                bg-zinc-100 text-zinc-900 dark:bg-zinc-950 dark:text-white
+                transition-all duration-300
+                ${sidebarOpen ? 'w-64' : 'w-0'}
+                md:flex md:flex-col md: justify-between
+            `}
         >
             <div>
-                <button
-                    className="w-full py-2 bg-zinc-300 dark:bg-zinc-900 transition-all duration-300 hover:bg-zinc-200 hover:dark:bg-zinc-800"
-                    onClick={onToggleSidebar}
-                >
-                    {isFolded ? '>' : '<'}
-                </button>
-
                 {/* Navigation Links */}
-                <nav className={`p-4 ${isFolded ? 'hidden' : 'block'}`}>
+                <nav className={`p-4 ${sidebarOpen ? 'block' : 'hidden'}`}>
                     <ul className="space-y-2">
                         <li>
                             <Link to="/">Home</Link>
@@ -76,7 +79,7 @@ const Navigation: React.FC<NavigationProps> = ({ isFolded, onToggleSidebar }) =>
             </div>
 
             {/* Dark Mode Toggle & Logout */}
-            <div className={`text-center ${isFolded ? 'hidden' : 'flex flex-col items-center justify-center'} mb-8`}>
+            <div className={`text-center ${sidebarOpen ? 'flex flex-col items-center justify-center' : 'hidden'} mb-8`}>
                 <div className="w-4/6">
                     <button
                         className='space-y-2 p-4 mb-4 w-full bg-zinc-300 dark:bg-zinc-900 rounded cursor-pointer transition-all duration-300 hover:bg-zinc-200 hover:dark:bg-zinc-800'
