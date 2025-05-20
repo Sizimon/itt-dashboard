@@ -2,6 +2,37 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthProvider';
+import { motion } from 'framer-motion';
+
+interface SidebarLinkProps {
+    to: string;
+    children: React.ReactNode;
+}
+
+const SidebarLink: React.FC<SidebarLinkProps> = ({ to, children }) => {
+    const [hovered, setHovered] = useState(false);
+
+    return (
+        <li
+            className='relative overflow-hidden'
+            onMouseEnter={() => setHovered(true)}
+            onMouseLeave={() => setHovered(false)}
+        >
+            <motion.div
+                initial={{ width: 0 }}
+                animate={{ width: hovered ? '100%' : 0 }}
+                transition={{ duration: 0.3, ease: 'easeInOut' }}
+                className="absolute left-0 top-0 h-full bg-amber-600 z-0"
+            />
+            <Link
+                to={to}
+                className="relative z-10 block px-4 py-2 transition-colors duration-150"
+            >
+                {children}
+            </Link>
+        </li>
+    )
+};
 
 interface NavigationProps {
     sidebarOpen: boolean;
@@ -9,10 +40,10 @@ interface NavigationProps {
     sidebarRef: React.RefObject<HTMLDivElement | null>;
 }
 
-const Navigation: React.FC<NavigationProps> = ({ 
-        sidebarOpen, 
-        onToggleSidebar,
-        sidebarRef,
+const Navigation: React.FC<NavigationProps> = ({
+    sidebarOpen,
+    onToggleSidebar,
+    sidebarRef,
 }) => {
     const { isAuthenticated, setIsAuthenticated } = useAuth();
     const navigate = useNavigate();
@@ -59,21 +90,11 @@ const Navigation: React.FC<NavigationProps> = ({
                 {/* Navigation Links */}
                 <nav className={`p-4 ${sidebarOpen ? 'block' : 'hidden'}`}>
                     <ul className="space-y-2">
-                        <li>
-                            <Link to="/">Home</Link>
-                        </li>
-                        <li>
-                            <Link to="/about">About</Link>
-                        </li>
-                        <li>
-                            <Link to="/user-dashboard">User Dashboard</Link>
-                        </li>
-                        <li>
-                            <Link to="/login">Login</Link>
-                        </li>
-                        <li>
-                            <Link to="/register">Register</Link>
-                        </li>
+                        <SidebarLink to="/">Home</SidebarLink>
+                        <SidebarLink to="/about">About</SidebarLink>
+                        <SidebarLink to="/user-dashboard">User Dashboard</SidebarLink>
+                        <SidebarLink to="/login">Login</SidebarLink>
+                        <SidebarLink to="/register">Register</SidebarLink>
                     </ul>
                 </nav>
             </div>
