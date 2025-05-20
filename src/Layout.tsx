@@ -36,7 +36,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     }, [sidebarOpen]);
 
     return (
-        <div className="flex h-screen relative">
+        <div className="flex-1 h-screen relative">
             {/* Mobile Hamburger Button */}
             <button
                 className="absolute top-4 left-4 z-30 p-2 text-zinc-900 dark:text-white rounded"
