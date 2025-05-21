@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import Layout from '../Layout';
 import { motion } from 'framer-motion';
-import { FaBeer } from "react-icons/fa";
+import { FaRegListAlt, FaRegStickyNote } from "react-icons/fa";
+import { MdOutlineViewKanban } from "react-icons/md";
 
 
 interface CreateTaskModalProps {
@@ -26,17 +27,17 @@ const CreateTaskModal: React.FC<CreateTaskModalProps> = ({ showModal, setShowMod
                 exit={{ scale: 0.8 }}
             >
                 <div
-                    className='flex flex-row items-center justify-center text-center space-x-12'>
-                    <div className="bg-amber-600 rounded-sm p-4 transition-all duration-300 hover:bg-amber-500 cursor-pointer">
-                        <h1>Icon</h1>
+                    className='flex flex-row items-center justify-center text-center space-x-4'>
+                    <div className="flex flex-col items-center bg-amber-600 w-1/3 rounded-sm p-4 transition-all duration-300 hover:bg-amber-500 cursor-pointer">
+                        <FaRegStickyNote className="text-white text-4xl" />
                         <h2>Create Note</h2>
                     </div>
-                    <div>
-                        <FaBeer className="text-amber-600 text-4xl" />
+                    <div className="flex flex-col items-center bg-amber-600 w-1/3 rounded-sm p-4 transition-all duration-300 hover:bg-amber-500 cursor-pointer">
+                        <FaRegListAlt className="text-white text-4xl" />
                         <h2>Create List</h2>
                     </div>
-                    <div>
-                        <h1>Icon</h1>
+                    <div className="flex flex-col items-center bg-amber-600 w-1/3 rounded-sm p-4 transition-all duration-300 hover:bg-amber-500 cursor-pointer">
+                        <MdOutlineViewKanban className="text-white text-4xl" />
                         <h2>Create Kanban</h2>
                     </div>
                 </div>
@@ -60,8 +61,8 @@ const UserDashboard: React.FC = () => {
 
     return (
         <Layout>
-            <div className="flex flex-col w-full text-zinc-800 dark:text-white items-center justify-center h-screen bg-white dark:bg-zinc-700">
-                <h1 className="text-2xl font-bold mb-4">Welcome Back, User</h1>
+            <div className="flex flex-col w-full text-zinc-800 dark:text-white items-center justify-center h-screen bg-white dark:bg-zinc-800">
+                <h1 className="text-3xl font-bold mb-4">Welcome Back, User</h1>
                 {userContent ? (
                     /* This will be a for loop to display every user created task */
                     <div className='grid grid-cols-2 grid-flow-col md:grid-cols-4 gap-4'>
@@ -84,7 +85,7 @@ const UserDashboard: React.FC = () => {
                     </div>
                 ) : (
                     <div className="flex flex-col items-center">
-                        <h2>Let's create your first task!</h2>
+                        <h2 className="text-xl mb-4">Let's create your first task!</h2>
                         <button
                             className='space-y-2 p-4 mb-8 w-full text-white bg-amber-600 rounded cursor-pointer transition-all duration-300 hover:bg-amber-500'
                             onClick={handleModalOpen}
