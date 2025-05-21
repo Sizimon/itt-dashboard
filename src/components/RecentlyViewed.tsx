@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { FaRegListAlt, FaRegStickyNote } from "react-icons/fa";
+import { FaRegListAlt, FaRegStickyNote, FaRegClock } from "react-icons/fa";
 import { MdOutlineViewKanban } from "react-icons/md";
 
 const cards = [
@@ -21,21 +21,21 @@ const cards = [
 ]
 
 const RecentlyViewed: React.FC = () => {
-    const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
     return (
-        <div className='flex flex-col items-center bg-zinc-200 p-4 rounded-lg shadow-lg mb-4'>
-            <p className='text-sm mb-4'>CLOCK Recently visited</p>
+        <div className='flex flex-col bg-zinc-200 dark:bg-zinc-950 p-4 rounded-lg shadow-lg mb-4'>
+            <div className='flex space-x-2 items-center text-amber-600 mb-4'>
+                <FaRegClock className='text-sm' />
+                <p className='text-sm'>Recently viewed</p>
+            </div>
             <div className='flex flex-row items-center justify-center space-x-2'>
                 {cards.map((card, index) => (
                     <div
                         key={index}
-                        className={`flex flex-col items-center rounded-sm transition-all duration-300 ease-in-out ${hoveredIndex === index ? 'bg-amber-600 text-white' : 'bg-white'} cursor-pointer flex-1 min-w-0 max-w-xs h-32`}
-                        onMouseEnter={() => setHoveredIndex(index)}
-                        onMouseLeave={() => setHoveredIndex(null)}
+                        className='flex flex-col items-center rounded-sm transition-all duration-300 ease-in-out  cursor-pointer flex-1 min-w-0 max-w-xs h-32 bg-zinc-100 dark:bg-zinc-900'
                     >
-                        <div className={`w-full text-center py-2 rounded-t-sm transition-all duration-300 ease-in-out ${hoveredIndex === index ? 'bg-white' : 'bg-amber-600'}`}>
-                            <div className={`flex space-x-2 items-center justify-center transition-all duration-300 ease-in-out ${hoveredIndex === index ? 'text-amber-600' : 'text-white'}`}>
+                        <div className='w-full text-center rounded-t-sm bg-zinc-300 dark:bg-zinc-800 py-2'>
+                            <div className='flex space-x-2 items-center justify-center text-amber-600'>
                                 {card.icon}
                                 <p>{card.type}</p>
                             </div>
