@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Layout from '../Layout';
+import RecentlyViewed from '../components/RecentlyViewed';
 import { motion } from 'framer-motion';
 import { FaRegListAlt, FaRegStickyNote } from "react-icons/fa";
 import { MdOutlineViewKanban } from "react-icons/md";
@@ -48,7 +49,7 @@ const CreateTaskModal: React.FC<CreateTaskModalProps> = ({ showModal, setShowMod
 }
 
 const UserDashboard: React.FC = () => {
-    const [userContent, setUserContent] = useState<boolean>(false);
+    const [userContent, setUserContent] = useState<boolean>(true);
     const [showModal, setShowModal] = useState<boolean>(false);
 
     const handleModalOpen = () => {
@@ -62,24 +63,39 @@ const UserDashboard: React.FC = () => {
     return (
         <Layout>
             <div className="flex flex-col w-full text-zinc-800 dark:text-white items-center justify-center h-screen bg-white dark:bg-zinc-800">
-                <h1 className="text-3xl font-bold mb-4">Welcome Back, User</h1>
+                <div>
+                    <h1 className='text-4xl md:text-6xl'>In<span className='text-amber-600'>Time</span>Tasks</h1>
+                    <h1 className="text-3xl font-bold my-4">WELCOME BACK, <span className='text-amber-600'>User</span></h1>
+                    <RecentlyViewed />
+                </div>
+                <nav className='w-full flex bg-zinc-200 justify-center mb-4 p-4 rounded-lg shadow-lg'>
+                    <ul className='flex space-x-4'>
+                        <li className='text-black uppercase p-2 rounded cursor-pointer transition-all duration-300 hover:text-amber-600'>Create new</li>
+                        <li className='text-black uppercase p-2 rounded cursor-pointer transition-all duration-300 hover:text-amber-600'>Sort: Method</li>
+                        <li className='text-black uppercase p-2 rounded cursor-pointer transition-all duration-300 hover:text-amber-600'>Filter</li>
+                    </ul>
+                </nav>
                 {userContent ? (
                     /* This will be a for loop to display every user created task */
-                    <div className='grid grid-cols-2 grid-flow-col md:grid-cols-4 gap-4'>
-                        <div className="p-32 rounded bg-zinc-200 dark:bg-zinc-800 shadow-lg">
-                            <h2>Task 1</h2>
-                            <p>Description of Task 1</p>
+                    <div className='grid grid-cols-2 grid-flow-col md:grid-cols-4 justify-items-center w-full px-4'>
+                        <div className="flex flex-col items-center p-4 rounded bg-amber-600 transition-all duration-150 hover:scale-105 hover:bg-amber-600/75 shadow-lg">
+                            <h2 className='text-xl flex items-center gap-2'>
+                                <span className='uppercase'>Shopping list</span>
+                                <FaRegListAlt />
+                            </h2>
+                            <p>Shopping list for DATE</p>
+                            <p>Current progress: STATUS</p>
                         </div>
-                        <div className="p-32 rounded bg-zinc-200 dark:bg-zinc-800 shadow-lg">
-                            <h2>Task 2</h2>
+                        <div className="flex flex-col items-center p-4 rounded bg-amber-600 transition-all duration-150 hover:bg-amber-600/75 shadow-lg">
+                            <h2 className='uppercase text-xl'>Task 2</h2>
                             <p>Description of Task 2</p>
                         </div>
-                        <div className="p-32 rounded bg-zinc-200 dark:bg-zinc-800 shadow-lg">
-                            <h2>Task 3</h2>
+                        <div className="flex flex-col items-center w-64 h-64 p-4 rounded bg-amber-600 transition-all duration-150 hover:bg-amber-600/75 shadow-lg">
+                            <h2 className='uppercase text-xl'>Task 3</h2>
                             <p>Description of Task 3</p>
                         </div>
-                        <div className="p-32 rounded bg-zinc-200 dark:bg-zinc-800 shadow-lg">
-                            <h2>Task 4</h2>
+                        <div className="flex flex-col items-center w-64 h-64 p-4 rounded bg-amber-600 transition-all duration-150 hover:bg-amber-600/75 shadow-lg">
+                            <h2 className='uppercase text-xl'>Task 4</h2>
                             <p>Description of Task 4</p>
                         </div>
                     </div>
@@ -97,9 +113,9 @@ const UserDashboard: React.FC = () => {
             </div>
             {showModal && (
                 <CreateTaskModal
-                showModal={showModal}
-                setShowModal={setShowModal}
-                handleModalClose={handleModalClose}
+                    showModal={showModal}
+                    setShowModal={setShowModal}
+                    handleModalClose={handleModalClose}
                 />
             )}
         </Layout>
