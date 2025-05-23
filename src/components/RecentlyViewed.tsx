@@ -32,7 +32,7 @@ const RecentlyViewed: React.FC = () => {
                 {cards.map((card, index) => (
                     <div
                         key={index}
-                        className='flex flex-col items-center rounded-sm transition-all duration-300 ease-in-out  cursor-pointer flex-1 min-w-0 max-w-xs h-32 bg-zinc-100 dark:bg-zinc-900'
+                        className='flex flex-col items-center rounded-sm cursor-pointer flex-1 min-w-0 max-w-xs h-32 bg-zinc-100 dark:bg-zinc-900 transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-lg'
                     >
                         <div className='w-full text-center rounded-t-sm bg-zinc-300 dark:bg-zinc-800 py-2'>
                             <div className='flex space-x-2 items-center justify-center text-amber-600'>
