@@ -91,66 +91,104 @@ const UserDashboard: React.FC = () => {
 
     return (
         <Layout>
-            <div className="flex flex-col w-full text-zinc-800 dark:text-white items-center justify-center h-screen bg-white dark:bg-zinc-900">
-                <div>
+            <div className="flex flex-col w-full text-zinc-800 dark:text-white items-center justify-center min-h-screen bg-white dark:bg-zinc-900 py-12">
+                <div className="justify-center items-center text-center">
                     <h1 className='text-4xl md:text-6xl'>In<span className='text-amber-600'>Time</span>Tasks</h1>
-                    <h1 className="text-3xl font-bold my-4">WELCOME BACK, <span className='text-amber-600'>User</span></h1>
+                    <h1 className="text-lg md:text-3xl font-bold md:my-4">WELCOME BACK, <span className='text-amber-600'>User</span></h1>
                     <RecentlyViewed />
                 </div>
                 <nav className='w-full flex bg-zinc-200 dark:bg-zinc-950 text-black dark:text-white justify-center p-4 rounded-b-lg shadow-lg'>
-                    <ul className='flex space-x-4 relative'>
-                        <button
-                            className='uppercase p-2 rounded cursor-pointer transition-all duration-300 hover:text-amber-600'
-                            onClick={handleModalOpen}
-                        >
-                            <li>Create New</li>
-                        </button>
-                        <button 
-                            className='flex items-center space-x-1 uppercase p-2 rounded cursor-pointer transition-all duration-300 hover:text-amber-600'
-                            onClick={handleSortMenuToggle}
-                        >
-                            <li>Sort: Method</li>
-                            <FaCaretDown />
-                        </button>
-                        {sortMenuOpen && (
-                            <div 
-                                className="absolute top-full left-[50%] mt-2 bg-white dark:bg-zinc-800 text-black dark:text-white shadow-lg rounded w-48 z-10"
+                    <ul className='flex space-x-4 justify-center items-center text-xs md:text-base'>
+                        <li>
+                            <button
+                                className='uppercase p-2 rounded cursor-pointer transition-all duration-300 hover:text-amber-600'
+                                onClick={handleModalOpen}
                             >
-                                <ul className="flex flex-col">
-                                    <li className="px-4 py-2 hover:bg-zinc-200 dark:hover:bg-zinc-700 cursor-pointer">Sort by Name</li>
-                                    <li className="px-4 py-2 hover:bg-zinc-200 dark:hover:bg-zinc-700 cursor-pointer">Sort by Date</li>
-                                    <li className="px-4 py-2 hover:bg-zinc-200 dark:hover:bg-zinc-700 cursor-pointer">Sort by Priority</li>
-                                </ul>
-                            </div>
-                        )}
-                        <button 
-                            className='flex items-center space-x-1 uppercase p-2 rounded cursor-pointer transition-all duration-300 hover:text-amber-600'
-                            onClick={handleFilterMenuToggle}
-                        >
-                            <li>Filter</li>
-                            <FaCaretDown />
-                        </button>
-                        {filterMenuOpen && (
-                            <div 
-                                className="absolute top-full left-[75%] mt-2 bg-white dark:bg-zinc-800 text-black dark:text-white shadow-lg rounded w-48 z-10"
+                                Create New
+                            </button>
+                        </li>
+                        <li className="relative">
+                            <button
+                                className='flex items-center space-x-1 uppercase p-2 rounded cursor-pointer transition-all duration-300 hover:text-amber-600'
+                                onClick={handleSortMenuToggle}
                             >
-                                <ul className="flex flex-col">
-                                    <li className="px-4 py-2 hover:bg-zinc-200 dark:hover:bg-zinc-700 cursor-pointer">Filter by Tag</li>
-                                    <li className="px-4 py-2 hover:bg-zinc-200 dark:hover:bg-zinc-700 cursor-pointer">Filter by Status</li>
-                                    <li className="px-4 py-2 hover:bg-zinc-200 dark:hover:bg-zinc-700 cursor-pointer">Filter by Date</li>
-                                </ul>
-                            </div>
-                        )}
+                                Sort: Method
+                                <FaCaretDown />
+                            </button>
+                            {sortMenuOpen && (
+                                <div className="absolute left-0 top-full mt-2 bg-white dark:bg-zinc-800 text-black dark:text-white shadow-lg rounded w-48 z-10">
+                                    <ul className="flex flex-col">
+                                        <li className="px-4 py-2 hover:bg-zinc-200 dark:hover:bg-zinc-700 cursor-pointer">Sort by Name</li>
+                                        <li className="px-4 py-2 hover:bg-zinc-200 dark:hover:bg-zinc-700 cursor-pointer">Sort by Date</li>
+                                        <li className="px-4 py-2 hover:bg-zinc-200 dark:hover:bg-zinc-700 cursor-pointer">Sort by Priority</li>
+                                    </ul>
+                                </div>
+                            )}
+                        </li>
+                        <li className="relative">
+                            <button
+                                className='flex items-center space-x-1 uppercase p-2 rounded cursor-pointer transition-all duration-300 hover:text-amber-600'
+                                onClick={handleFilterMenuToggle}
+                            >
+                                Filter
+                                <FaCaretDown />
+                            </button>
+                            {filterMenuOpen && (
+                                <div
+                                    className="
+                                        fixed mt-2 w-screen max-w-none left-0 rounded-b-sm bg-zinc-100 dark:bg-zinc-800 text-black dark:text-white shadow-lg z-50
+                                        flex flex-row items-center justify-center px-4 py-3 gap-4
+                                    "
+                                    style={{ minWidth: '100vw' }}
+                                >
+                                    {/* Search */}
+                                    <div className="flex items-center gap-2">
+                                        <span className="font-semibold uppercase text-amber-600">Search:</span>
+                                        <input
+                                            type="text"
+                                            placeholder="Search..."
+                                            className="border rounded px-2 py-1 text-xs dark:bg-zinc-900 dark:border-zinc-700"
+                                        />
+                                    </div>
+                                    {/* Tags */}
+                                    <div className="flex items-center gap-2">
+                                        <span className="font-semibold uppercase text-amber-600">Tags:</span>
+                                        <label className="flex items-center gap-1 text-xs">
+                                            <input type="checkbox" className="accent-amber-600" /> cron
+                                        </label>
+                                        <label className="flex items-center gap-1 text-xs">
+                                            <input type="checkbox" className="accent-amber-600" /> ssl
+                                        </label>
+                                        <label className="flex items-center gap-1 text-xs">
+                                            <input type="checkbox" className="accent-amber-600" /> dev
+                                        </label>
+                                    </div>
+                                    {/* Type */}
+                                    <div className="flex items-center gap-2">
+                                        <span className="font-semibold uppercase text-amber-600">Type:</span>
+                                        <label className="flex items-center gap-1 text-xs">
+                                            <input type="checkbox" className="accent-amber-600" /> Note
+                                        </label>
+                                        <label className="flex items-center gap-1 text-xs">
+                                            <input type="checkbox" className="accent-amber-600" /> List
+                                        </label>
+                                        <label className="flex items-center gap-1 text-xs">
+                                            <input type="checkbox" className="accent-amber-600" /> Kanban
+                                        </label>
+                                    </div>
+                                </div>
+                            )}
+                        </li>
                     </ul>
                 </nav>
                 <div className='bg-zinc-100 dark:bg-zinc-950 w-11/12 mt-8 p-8 rounded-lg'>
                     {userContent ? (
                         /* This will be a for loop to display every user created task */
-                        <div className='grid grid-cols-2 grid-flow-row md:grid-cols-3 justify-items-center w-full px-4 space-x-4'>
+                        <div className='grid grid-cols-1 grid-flow-row md:grid-cols-3 justify-items-center w-full md:px-4 md:space-x-4'>
                             {cards.map((card, index) => (
                                 <div
                                     key={index}
-                                    className='flex flex-col items-center text-center p-4 rounded-lg shadow-lg mb-4 bg-zinc-200 dark:bg-zinc-900 w-10/12'
+                                    className='flex flex-col items-center text-center p-4 rounded-lg shadow-lg mb-4 bg-zinc-200 dark:bg-zinc-900 w-full md:w-10/12'
                                 >
                                     <div className='flex flex-col items-center w-full justify-between mb-4 text-amber-600'>
                                         <div>
