@@ -26,10 +26,11 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "npm run tailwind:build && react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "tailwind": "npx @tailwindcss/cli -i ./src/main-input.css -o ./src/main.css --watch"
+    "tailwind": "npx @tailwindcss/cli -i ./src/main-input.css -o ./src/main.css --watch",
+    "tailwind:build": "npx @tailwindcss/cli -i ./src/main-input.css -o ./src/main.css"
   },
   "eslintConfig": {
     "extends": [
