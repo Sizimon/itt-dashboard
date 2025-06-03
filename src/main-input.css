@@ -3,16 +3,16 @@
 
 
 @theme {
-    --breakpoint-bp: 1023px,
-    --breakpoint-ap: 1025px,
-    --breakpoint-UWQ: 3440px,
+    --breakpoint-bp: 1023px;
+    --breakpoint-ap: 1025px;
+    --breakpoint-UWQ: 3440px;
 
-    --font-headers: "Teko", "sans-serif",
-    --font-body: "Work Sans", "sans-serif",
-    --font-size-headers: 3rem,
-    --font-size-body: 1.5rem,
-    --font-weight-headers: 700,
-    --font-weight-body: 400,
+    --font-headers: "Teko", "sans-serif";
+    --font-body: "Work Sans", "sans-serif";
+    --font-size-headers: 3rem;
+    --font-size-body: 1.5rem;
+    --font-weight-headers: 700;
+    --font-weight-body: 400;
 }
 
 
