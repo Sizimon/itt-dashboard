@@ -1,5 +1,5 @@
 import React, { useEffect, useState} from 'react';
-import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
+import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
 import { useAuth } from './context/AuthProvider';
 
 import Register from './pages/Register';
@@ -19,7 +19,7 @@ const App: React.FC = () => {
   }, [isAuthenticated]);
 
   return (
-    <Router>
+    <BrowserRouter basename="/itt-dashboard">
       <Routes> 
         <Route 
           path="/register" 
@@ -38,7 +38,7 @@ const App: React.FC = () => {
         element={isAuthenticated ? <Navigate to="/user-dashboard"/> : <Navigate to="/register" />} 
         />
       </Routes>
-    </Router>
+    </BrowserRouter>
   );
 }
 
